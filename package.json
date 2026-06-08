@@ -1,0 +1,31 @@
+{
+  "name": "privacy-filter-api",
+  "version": "1.0.0",
+  "description": "HTTP API for OpenAI Privacy Filter using Hugging Face Transformers.js",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/server.js",
+    "download:model": "bash scripts/download-model.sh",
+    "smoke": "node scripts/smoke.js"
+  },
+  "keywords": [
+    "huggingface",
+    "transformers.js",
+    "privacy-filter",
+    "pii",
+    "redaction"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
+    "dotenv": "^17.4.2",
+    "express": "^4.19.2",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

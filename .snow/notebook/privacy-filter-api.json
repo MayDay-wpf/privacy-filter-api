@@ -1,0 +1,11 @@
+{
+  "src/server.js": [
+    {
+      "id": "notebook-1780889821445_w3trwejln",
+      "filePath": "src/server.js",
+      "note": "新增 Swagger/OpenAPI 与 API Key 鉴权：/docs 和 /openapi.json 公开；/health 公开并返回 auth 状态；设置 API_KEY 后 /detect 和 /mask 需要 x-api-key（可由 API_KEY_HEADER 自定义）或 Authorization: Bearer <API_KEY>。未设置 API_KEY 时不启用鉴权。",
+      "createdAt": "2026-06-08T11:37:01.445",
+      "updatedAt": "2026-06-08T11:37:01.445"
+    }
+  ]
+}
