@@ -400,9 +400,22 @@ curl -X POST http://127.0.0.1:3000/mask \
 
 ### 构建镜像
 
+默认构建轻量镜像，不把模型打进镜像，推荐运行时挂载 `./models`：
+
 ```bash
 docker build -t privacy-filter-api .
 ```
+
+如果希望构建时预下载模型并打进镜像，可以使用 build args，例如打包 `fp16`：
+
+```bash
+docker build \
+  --build-arg DOWNLOAD_MODEL=true \
+  --build-arg MODEL_PRECISION=fp16 \
+  -t privacy-filter-api:fp16 .
+```
+
+可用 `MODEL_PRECISION`：`fp32`、`fp16`、`q4`、`q4f16`、`quantized`。
 
 ### 运行容器
 
@@ -417,6 +430,16 @@ docker run --rm \
   -v "$PWD/models:/app/models" \
   -v "$PWD/.cache:/app/.cache" \
   privacy-filter-api
+```
+
+如果镜像中已经预下载模型，则可以不挂载 `models`：
+
+```bash
+docker run --rm \
+  -p 3000:3000 \
+  -e API_KEY=your-secret-key \
+  -e TRANSFORMERS_DTYPE=fp16 \
+  privacy-filter-api:fp16
 ```
 
 访问：

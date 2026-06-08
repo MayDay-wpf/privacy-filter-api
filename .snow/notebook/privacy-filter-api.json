@@ -16,5 +16,14 @@
       "createdAt": "2026-06-08T11:50:38.029",
       "updatedAt": "2026-06-08T11:50:38.029"
     }
+  ],
+  "Dockerfile": [
+    {
+      "id": "notebook-1780899369938_ei3b4gbkn",
+      "filePath": "Dockerfile",
+      "note": "Dockerfile 已改为多阶段构建：deps 安装生产依赖，model 阶段支持通过 DOWNLOAD_MODEL=true 和 MODEL_PRECISION 预下载模型，runtime 阶段默认非 root node 用户运行，LOCAL_MODEL_ROOT=/app/models，TRANSFORMERS_CACHE=/app/.cache/transformers，并内置 /health HEALTHCHECK。默认镜像不打包模型，建议运行时挂载 models；如预下载则构建时需有网络和 Python/pip。",
+      "createdAt": "2026-06-08T14:16:09.938",
+      "updatedAt": "2026-06-08T14:16:09.938"
+    }
   ]
 }

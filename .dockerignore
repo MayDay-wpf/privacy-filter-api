@@ -1,6 +1,12 @@
 node_modules
 .cache
 .git
+.gitignore
 .env
+.env.*
+!.env.example
 .DS_Store
 npm-debug.log*
+coverage
+.snow
+models
