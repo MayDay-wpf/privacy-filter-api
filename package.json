@@ -6,9 +6,10 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
+    "start:model": "node scripts/run.js",
     "dev": "node --watch src/server.js",
     "check": "node --check src/server.js",
-    "download:model": "bash scripts/download-model.sh",
+    "download:model": "node scripts/download-model.js",
     "smoke": "node scripts/smoke.js"
   },
   "keywords": [

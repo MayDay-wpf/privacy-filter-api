@@ -7,5 +7,14 @@
       "createdAt": "2026-06-08T11:37:01.445",
       "updatedAt": "2026-06-08T11:37:01.445"
     }
+  ],
+  "scripts/download-model.js": [
+    {
+      "id": "notebook-1780890638029_on7vvkptm",
+      "filePath": "scripts/download-model.js",
+      "note": "模型下载 npm 脚本已改为跨平台 Node.js 实现：package.json 的 download:model 调用 scripts/download-model.js；旧 scripts/download-model.sh 仅作为 Unix/macOS 包装器。下载脚本会自动探测 Windows 的 py -3/python/python3 和 Unix 的 python3/python，并默认设置 HF_HUB_DISABLE_XET=1。",
+      "createdAt": "2026-06-08T11:50:38.029",
+      "updatedAt": "2026-06-08T11:50:38.029"
+    }
   ]
 }

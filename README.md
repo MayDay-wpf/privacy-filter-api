@@ -74,6 +74,8 @@ TRANSFORMERS_CACHE=./.cache/transformers
 
 模型下载脚本支持只下载一种 ONNX 精度，避免把仓库里的所有模型格式和所有精度都拉下来。
 
+`npm run download:model` 已改为 Node.js 跨平台脚本，可在 macOS/Linux/Windows 直接使用；Unix/macOS 下仍可通过 `bash scripts/download-model.sh` 调用兼容包装脚本。
+
 默认下载位置：
 
 ```text
@@ -102,7 +104,7 @@ onnx/model.onnx_data*
 启动时使用：
 
 ```bash
-TRANSFORMERS_DTYPE=fp32 npm start
+npm run start:model -- fp32
 ```
 
 ### 下载 fp16
@@ -121,7 +123,7 @@ onnx/model_fp16.onnx_data*
 启动时使用：
 
 ```bash
-TRANSFORMERS_DTYPE=fp16 npm start
+npm run start:model -- fp16
 ```
 
 ### 下载 q4
@@ -140,7 +142,7 @@ onnx/model_q4.onnx_data*
 启动时使用：
 
 ```bash
-TRANSFORMERS_DTYPE=q4 npm start
+npm run start:model -- q4
 ```
 
 ### 下载 q4f16
@@ -159,7 +161,7 @@ onnx/model_q4f16.onnx_data*
 启动时使用：
 
 ```bash
-TRANSFORMERS_DTYPE=q4f16 npm start
+npm run start:model -- q4f16
 ```
 
 ### 下载 quantized
@@ -191,34 +193,49 @@ bash scripts/download-model.sh --help
 
 ### 网络不稳定时禁用 Xet
 
-如果下载时遇到 `cas-bridge.xethub.hf.co`、TLS EOF、Xet CAS 等错误，可以显式禁用 Xet：
+脚本默认会设置 `HF_HUB_DISABLE_XET=1`。如果需要显式设置，macOS/Linux 可使用：
 
 ```bash
 HF_HUB_DISABLE_XET=1 npm run download:model -- fp16
 ```
 
-如果下载目录里已有不完整文件，可以先清理后重下：
+Windows PowerShell 可使用：
+
+```powershell
+$env:HF_HUB_DISABLE_XET="1"; npm run download:model -- fp16
+```
+
+如果下载目录里已有不完整文件，可以先清理后重下。macOS/Linux：
 
 ```bash
 rm -rf ./models/openai/privacy-filter
 HF_HUB_DISABLE_XET=1 npm run download:model -- fp16
 ```
 
+Windows PowerShell：
+
+```powershell
+Remove-Item -Recurse -Force .\models\openai\privacy-filter
+$env:HF_HUB_DISABLE_XET="1"; npm run download:model -- fp16
+```
+
 ## 启动服务
 
-### 方式一：直接使用环境变量启动
+### 方式一：使用跨平台运行脚本
 
 假设你下载的是 `fp16`：
 
 ```bash
-TRANSFORMERS_DTYPE=fp16 npm start
+npm run start:model -- fp16
 ```
 
 假设你下载的是 `q4`：
 
 ```bash
-TRANSFORMERS_DTYPE=q4 npm start
+npm run start:model -- q4
 ```
+
+该方式会在启动前设置 `TRANSFORMERS_DTYPE`，macOS/Linux/Windows 都可直接使用。
 
 ### 方式二：使用 `.env` 启动
 
