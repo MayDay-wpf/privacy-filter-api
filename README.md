@@ -71,6 +71,16 @@ pm2 logs privacy-filter-api
 pm2 restart privacy-filter-api
 ```
 
+Windows 如果 PM2 表格里显示启动的是 `NPM.CMD`，但浏览器访问不了，通常是旧版本脚本用 `pm2 start npm -- ...` 启动导致的。请更新代码后在项目目录重新执行：
+
+```powershell
+pm2 delete privacy-filter-api
+npm run install:daemon -- --precision fp16
+pm2 logs privacy-filter-api
+```
+
+新版脚本会让 PM2 直接守护 `scripts/run.js`，不再通过 `npm.cmd` 中转。
+
 ## 安装依赖
 
 ```bash

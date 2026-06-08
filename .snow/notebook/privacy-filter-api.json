@@ -28,6 +28,13 @@
   ],
   "scripts/install-daemon.js": [
     {
+      "id": "notebook-1780901756447_5awztbicr",
+      "filePath": "scripts/install-daemon.js",
+      "note": "Windows 上 PM2 如果显示启动目标为 NPM.CMD 且 status online 但 health 访问不了，原因通常是通过 `pm2 start npm -- run ...` 中转 npm.cmd 后实际 Node 服务没有稳定挂载。脚本已改为 `pm2 start scripts/run.js --name ... --cwd <projectRoot> -- <precision>`，让 PM2 直接守护 Node 入口。",
+      "createdAt": "2026-06-08T14:55:56.447",
+      "updatedAt": "2026-06-08T14:55:56.447"
+    },
+    {
       "id": "notebook-1780900339256_7gve6lzw4",
       "filePath": "scripts/install-daemon.js",
       "note": "新增跨平台一键安装/守护脚本：npm run install:daemon 调用 scripts/install-daemon.js，支持 macOS/Linux/Windows；会检查 Git/Node/npm、克隆或复用项目、npm install、检测 models/<MODEL_ID>/onnx 下已下载精度，不存在则交互选择精度并调用 npm run download:model，最后用 PM2 启动并尝试配置开机自启。",
