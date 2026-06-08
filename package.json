@@ -10,6 +10,7 @@
     "dev": "node --watch src/server.js",
     "check": "node --check src/server.js",
     "download:model": "node scripts/download-model.js",
+    "install:daemon": "node scripts/install-daemon.js",
     "smoke": "node scripts/smoke.js"
   },
   "keywords": [

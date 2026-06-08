@@ -24,6 +24,53 @@
 - npm
 - Python 3（仅下载模型时需要，用于调用 `huggingface_hub`）
 
+## 一键安装并启动进程守护
+
+项目提供跨平台一键脚本，支持 macOS、Linux、Windows：从 `git clone` 开始，安装依赖，检查本地模型；如果模型不存在，会让用户选择下载精度，然后用 PM2 启动并守护服务进程。
+
+> 前置要求：目标机器需已安装 Git、Node.js >= 20、npm；首次下载模型还需要 Python 3。
+
+### 从任意目录克隆安装
+
+macOS / Linux / Windows PowerShell 都可执行：
+
+```bash
+git clone https://github.com/MayDay-wpf/privacy-filter-api.git privacy-filter-api
+cd privacy-filter-api
+npm install
+npm run install:daemon
+```
+
+如果已经有项目仓库，也可直接在项目根目录运行：
+
+```bash
+npm run install:daemon
+```
+
+常用参数：
+
+```bash
+npm run install:daemon -- --dir /opt/privacy-filter-api --precision fp16
+npm run install:daemon -- --repo https://github.com/MayDay-wpf/privacy-filter-api.git --dir ./privacy-filter-api
+npm run install:daemon -- --yes
+npm run install:daemon -- --no-startup
+```
+
+说明：
+
+- `--precision` 可选：`fp32`、`fp16`、`q4`、`q4f16`、`quantized`。
+- 不传 `--precision` 且未检测到模型时，脚本会交互式询问下载哪种精度，默认 `fp16`。
+- 脚本会安装/复用 PM2，并执行 `pm2 start`、`pm2 save`。
+- macOS/Linux 的开机自启通常需要按 PM2 输出手动执行一条 `sudo ...` 命令；Windows 会尝试安装并配置 `pm2-windows-startup`。
+
+安装完成后可使用：
+
+```bash
+pm2 status
+pm2 logs privacy-filter-api
+pm2 restart privacy-filter-api
+```
+
 ## 安装依赖
 
 ```bash
